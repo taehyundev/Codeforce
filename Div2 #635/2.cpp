@@ -28,47 +28,15 @@ Lightning Strike 7−10=−3.
 
 //N is Void Absorption 
 //M is Lightning Strike
-int x, n, m;
-//floor(hp/2)
-//hp -10
-int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	int t;
-	int cache;
-	cin >> t;
-	while (t--) {
-		cin >> x >> n >> m; 
-		queue<int> q;
-		q.push(x);
-		while (!q.empty()) {
-			int qSize = q.size();
-			for (int i = 0; i <= q.size(); i++) {
-				cache = q.front();
-				q.pop();
-				if (cache > round(cache / 2) + 10 && n !=0) {
-					cache = round(cache / 2)+10;
-					q.push(cache);
-					n--;
-				}
-				else {
-					if (m != 0) {
-						cache = cache - 10;
-						q.push(cache);
-						m--;
-					}
-				}
-
-			}
-		}
-
-		if (cache <= 0) {
-			cout <<cache<< ", YES\n";
-		
-		}
-		else {
-			cout << "NO\n";
-		}
-	}
+int x,n,m,t;
+void solve(){
+	scanf("%d%d%d",&x,&n,&m);
+	while (x>0&&n&&x/2+10<x){n--;x=x/2+10;}
+	if (x<=m*10)printf("YES\n");
+	else printf("NO\n"); 
+}
+int main(){
+	scanf("%d",&t);
+	while(t--)solve();
+	return 0;
 }
