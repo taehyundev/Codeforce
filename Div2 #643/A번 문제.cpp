@@ -1,53 +1,41 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
+#include <bits/stdc++.h>
+#define x first
+#define y second
 using namespace std;
-long long a1;
-long long dp[100];
-long long temp;
-long long minDigit(long long n) {
-   string m = to_string(n);
-   int r = m[0] - '0';
-   for (int i = 1; i < m.length(); i++) {
-      int temp = m[i] - '0';
-      if (r> temp) {
-         r = temp;
-      }
-   }
-   return r;
+typedef long long ll;
+typedef long double ld;
+ll st, k;
+
+ll mindig(ll x) {
+    ll mn = 10;
+    while (x) {
+        mn = min(mn, (ll)x % 10);
+        x /= 10;
+    }
+    return mn;
 }
- 
-long long maxDigit(long long n) {
-   string m = to_string(n);
-   int r = m[0] - '0';
-   for (int i = 1; i < m.length(); i++) {
-      int temp = m[i] - '0';
-      if (r < temp) {
-         r = temp;
-      }
-   }
-   return r;
+
+ll maxdig(ll x) {
+    ll mx = 0;
+    while (x) {
+        mx = max(mx, (ll)x % 10);
+        x /= 10;
+    }
+    return mx;
 }
- 
-void init() {
-   cin.tie(NULL);
-   cout.tie(NULL);
-   ios::sync_with_stdio(false);
-}
+
 int main() {
-   init();
-   int t;
-   long long result;
-   cin >> t;
-   for (int i = 0; i < t; i++) {
-      int k;
-      cin >> a1 >> k;;
-      temp= a1;
-      bool sw = true;
-      for (int i = 2; i <= k; i++) {
-         result = temp + (minDigit(temp) * maxDigit(temp));
-         temp = result;
-      }
-      cout << result << '\n';
-   }
+    ios_base::sync_with_stdio(false); cin.tie(0);
+    int T; cin >> T;
+    ll mn, mx;
+    while (T--) {
+        cin >> st >> k;
+        for (ll i = 1; i <= k - 1; i++) {
+            mn = mindig(st);
+            mx = maxdig(st);
+            if (mn == 0 || mx == 0) break;
+            st += mn * mx;
+        }
+        cout << st << '\n';
+    }
 }
